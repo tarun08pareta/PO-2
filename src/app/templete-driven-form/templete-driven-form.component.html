@@ -1,0 +1,46 @@
+<div class="container">
+    <form  class="form" #templateForm="ngForm"  (ngSubmit)="signup(templateForm.value)">
+        <div class="form_inner">
+            <h1>Sing Up</h1>
+            <input type="text"  placeholder="First Name" name="firstName" ngModel  #firstName="ngModel" required pattern="[a-zA-Z ]+" appTemplate="pareta">
+            <p class="invalid-input">
+                <span *ngIf="firstName.invalid && firstName.touched">Please Enter Valid firstName</span><br>
+                <span *ngIf="firstName.errors?.['pattern']">firstName must contain only letters</span><br>
+                <span *ngIf="firstName.errors?.['appNameNotAllow']">{{firstName.value}} not allow</span>
+
+            </p>
+            <br>
+            <input type="text" placeholder="Last Name" name="lastName" ngModel  #lastName="ngModel" required pattern="[a-zA-Z ]+">
+            <p class="invalid-input"><span *ngIf="lastName.invalid && lastName.touched">Please Enter Valid lastName</span>
+                <span *ngIf="lastName.errors?.['pattern']">lastName must contain only letters</span>
+            </p>
+            <br>
+            <input type="text" placeholder="Enter Your Full Address" name="address"  ngModel  #address="ngModel" required>
+            <p class="invalid-input"><span *ngIf="address.invalid && address.touched">Please Enter Address</span></p>
+            <br>
+            <input type="email" placeholder="Email eg(company@gmail.com)" name="email" ngModel #email="ngModel" required email appTemplate="pareta">
+            <p class="invalid-input"><span *ngIf="email.invalid && email.touched">Please Enter Valid Email</span>
+                <span *ngIf="email.errors?.['appNameNotAllow']">{{email.value}} text not allow in email</span></p>
+            <br>
+          
+            <input type="password" placeholder="Password" name="password" ngModel #password="ngModel" required 
+            minlength="6" maxlength="10">
+            <p class="invalid-input"><span *ngIf="password.invalid && (password.touched || password.dirty)">Please Enter Valid Password</span>
+                <span *ngIf="password.errors && password.errors['maxlength']">Password must be at most 10 characters</span><br>
+                <span *ngIf="password.errors && password.errors['minlength']">Password must be at least 6 characters</span><br>
+            </p>
+            <br>
+            <input type="password" placeholder="Confirm Password" name="confirmPassword" ngModel
+            #confirmPassword="ngModel" required 
+        minlength="6" maxlength="10"
+            >
+            <p class="invalid-input"><span *ngIf="confirmPassword.invalid && (confirmPassword.touched || password.dirty)">Please Enter Valid confirmPassword</span>
+                <span *ngIf="password.errors && password.errors['maxlength']">confirmPassword must be at most 10 characters</span>
+                <span *ngIf="password.errors && password.errors['minlength']">confirmPassword must be at least 6 characters</span>
+            </p>
+            <br>
+            <button>Submit</button>
+            <!-- <a>Login ?</a> -->
+        </div>
+    </form>
+</div>

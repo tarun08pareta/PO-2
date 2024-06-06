@@ -1,0 +1,136 @@
+<div class="container">
+    <div class="content">
+        <form [formGroup]="studentForm" (ngSubmit)="addData()">
+            <!-- <img src="path_to_your_image.jpg" alt="Form Image"> -->
+            <div class="form-title">
+                <h2>Registration Form</h2>
+            </div>
+            <div class="name">
+                <div>
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" formControlName="firstName">
+                    <span style="color: red;"
+                        *ngIf=" studentForm.get('firstName')?.invalid && studentForm.get('firstName')?.touched && studentForm.get('firstName')?.dirty">
+                        <span *ngIf="studentForm.get('firstName')?.errors?.['required']">This field is required</span>
+                        <span *ngIf="studentForm.get('firstName')?.errors?.['minlength']">
+                            Length is at minimum (3) characters.
+                          </span>
+                        <span *ngIf="studentForm.get('firstName')?.errors?.['pattern']">Only characters allowed</span>
+                        <!-- <span *ngIf="firstName?.errors?.['userOrEmailInvalid']">{{studentForm.value.firstName}} characters allowed</span> -->
+
+                    </span>
+                </div>
+                <div>
+                    <label for="middleName">Middle Name</label>
+                    <input type="text" id="middleName" formControlName="middleName">
+                    <span style="color: red;"
+                    *ngIf=" studentForm.get('middleName')?.invalid && studentForm.get('middleName')?.touched && studentForm.get('middleName')?.dirty">
+                    <span *ngIf="studentForm.get('middleName')?.errors?.['required']">This field is required</span>
+                    <span *ngIf="studentForm.get('middleName')?.errors?.['minlength']">
+                        Length is at minimum (3) characters.
+                      </span>
+                    <span *ngIf="studentForm.get('middleName')?.errors?.['pattern']">Only characters allowed</span>
+
+                </span>
+                </div>
+                <div>
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" formControlName="lastName">
+                    <span style="color: red;"
+                    *ngIf=" studentForm.get('lastName')?.invalid && studentForm.get('lastName')?.touched && studentForm.get('lastName')?.dirty">
+                    <span *ngIf="studentForm.get('lastName')?.errors?.['required']">This field is required</span>
+                    <span *ngIf="studentForm.get('lastName')?.errors?.['minlength']">
+                        Length is at minimum (3) characters.
+                      </span>
+                    <span *ngIf="studentForm.get('lastName')?.errors?.['pattern']">Only characters allowed</span>
+
+                </span>
+                </div>
+            </div>
+            <div>
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" formControlName="fullName">
+            </div>
+            <div class="name">
+                <div>
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" formControlName="dob">
+                </div>
+                <div>
+                    <label for="dob">Age</label>
+                    <input type="text" id="dob" formControlName="age">
+                </div>
+                <div *ngIf="studentForm.controls['age'].value >=18">
+                    <label for="licenceNo">Licence No</label>
+                    <input type="text" id="licenceNo" formControlName="licenceNo">
+
+                    <span style="color: red;"
+                        *ngIf=" studentForm.get('licenceNo') && studentForm.get('licenceNo')?.invalid && studentForm.get('licenceNo')?.touched && studentForm.get('licenceNo')?.dirty">
+                        <span *ngIf="studentForm.get('licenceNo')?.errors?.['required']">This field is required</span>
+                        <span *ngIf="studentForm.get('licenceNo')?.errors?.['minlength']">
+                            Length is at minimum (3) characters.
+                          </span>
+                        <span *ngIf="studentForm.get('licenceNo')?.errors?.['pattern']">Only Big characters and number allowed</span>
+                    </span>
+
+
+
+                </div>
+            </div>
+            <div class="name">
+                <div *ngIf="studentForm.controls['age'].value >=18">
+                    <label for="country">Country</label>
+                    <select id="country" formControlName="country">
+                        <option value="">Select Country</option>
+                        <option value="INDIA">INDIA</option>
+                        <option value="Canada">Canada</option>
+                        <option value="UK">UK</option>
+                        <!-- Add more countries as needed -->
+                    </select>
+                </div>
+                <div *ngIf="studentForm.controls['country'].value === 'INDIA'">
+                    <label for="state">State</label>
+                    <input type="text" id="state" formControlName="state">
+                    <span style="color: red;"
+                    *ngIf=" studentForm.get('state') && studentForm.get('state')?.invalid && studentForm.get('state')?.touched && studentForm.get('state')?.dirty">
+                    <span *ngIf="studentForm.get('state')?.errors?.['required']">This field is required</span>
+                    <span *ngIf="studentForm.get('state')?.errors?.['minlength']">
+                        Length is at minimum (3) characters.
+                      </span>
+                    <span *ngIf="studentForm.get('state')?.errors?.['pattern']">Only characters allowed</span>
+                </span>
+                </div>
+            </div>
+            <div class="name" *ngIf="studentForm.controls['country'].value === 'INDIA'">
+                <div>
+                    <label for="identityType">Identity Type</label>
+                    <select id="identityType" formControlName="identityType">
+                        <option value="">Select Identity Type</option>
+                        <!-- <option value="Passport">Passport</option> -->
+                        <option value="AdhaarCard">AdhaarCard</option>
+                        <option value="PanCard">Pan Card</option>
+                        <!-- Add more identity types as needed -->
+                    </select>
+
+              
+                </div>
+                <div >
+                    <label for="cardNo">Card No</label>
+                    <input type="text" id="cardNo" formControlName="cardNo">
+                    <span style="color: red;"
+                    *ngIf=" studentForm.get('cardNo') && studentForm.get('cardNo')?.invalid && studentForm.get('cardNo')?.touched && studentForm.get('cardNo')?.dirty">
+                    <span *ngIf="studentForm.get('cardNo')?.errors?.['required']">This field is required</span>
+                    <!-- <span *ngIf="studentForm.get('identityType')?.errors?.['minlength']">
+                        Length is at minimum (3) characters.
+                      </span> -->
+                    <span *ngIf="studentForm.get('cardNo')?.errors?.['pattern']">Only allowed valid card number</span>
+                </span>
+                </div>
+            </div>
+            <div class="btn">
+                <button type="submit">Submit</button>
+                <button (click)="resetButton()">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>

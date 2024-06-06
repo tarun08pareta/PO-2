@@ -1,0 +1,70 @@
+<div class="form-container">
+    <form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
+      <h2>Course Registration Form</h2>
+      
+      <!-- Name Input -->
+      <!-- <small *ngIf="dynamicForm?.errors?.['Match']">name and email not be same</small> -->
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name" placeholder="enter your name">
+      <span style="color: red;" *ngIf="dynamicForm.get('name')?.errors?.['required'] && dynamicForm.get('name')?.touched" class="error">
+        Name is required.
+      </span>
+      <span  style="color: red;" *ngIf="dynamicForm.get('name')?.errors?.['minlength'] && dynamicForm.get('name')?.touched" class="error">
+        Name should be at least 3 characters long.
+      </span>
+      <span  style="color: red;" *ngIf="dynamicForm.get('name')?.errors?.['pattern'] && dynamicForm.get('name')?.touched" class="error">
+        Only ch.aracters are allowed.
+      </span>,.
+      <span  style="color: red;" *ngIf="dynamicForm.get('name')?.errors?.['userInvalid'] && dynamicForm.get('name')?.touched" class="error">
+       {{dynamicForm.value.name}} character is not allow
+      </span>
+      
+      <!-- Email Input -->
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" placeholder="enter your email">
+      <span style="color: red;" *ngIf="dynamicForm.get('email')?.invalid && dynamicForm.get('email')?.touched" class="error">
+        Enter a valid email.
+      </span>
+      <span  style="color: red;" *ngIf="dynamicForm.get('email')?.errors?.['userInvalid'] && dynamicForm.get('email')?.touched" class="error">
+        {{dynamicForm.value.email}} email is not allow
+       </span>
+       
+      <!-- Course Input -->
+      <label for="course">Course:</label>
+      <input type="text" id="course" formControlName="course" placeholder="enter your course">
+      <span style="color: red;" *ngIf="dynamicForm.get('course')?.invalid && dynamicForm.get('course')?.touched" class="error">
+        Enter a valid course.
+      </span>
+      
+      <!-- Gender Radio Buttons -->
+      <label for="gender">Gender:</label>
+      <div class="gender-options">
+        <input type="radio" id="male" formControlName="gender" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" formControlName="gender" value="female">
+        <label for="female">Female</label>
+      </div>
+      
+      <!-- Skills Input and List -->
+      <label for="skills">Skills:</label>
+      <div class="skills-input" formArrayName="skills">
+        <input type="text" id="skill"  [formControl]="newSkillControl" placeholder="enter your skill">
+        <button type="button" (click)="addSkill()">Add Skill</button>
+        <span style="color: red;" *ngIf="dynamicForm.get('newSkillControl')?.invalid && dynamicForm.get('newSkillControl')?.touched" class="error">
+          Enter a valid course.
+        </span>
+        <!-- Displaying the list of skills -->
+        <ul>
+          <li *ngFor="let skill of skills.controls; let i = index">
+            <input [formControlName]="i" type="text" >
+            <button (click)="removeSkill(i)">remove</button>
+          </li>
+        </ul>
+      </div>
+      
+      
+      <!-- Submit Button -->
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  
